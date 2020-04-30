@@ -152,6 +152,7 @@ minikube-use-internal-docker:
 copy-frontend:
 	@cd ../client && flutter build web
 	@cp -rf ../client/build/web flutter/
+	@cp ../client/assets/env-template.json flutter/web/assets/assets/env.json
 
 ## (Re)-deploy frontend and backend on minikube
 minikube-deploy: copy-frontend minikube-use-internal-docker apply-secrets docker-images docker-push
@@ -170,6 +171,7 @@ apply-secrets:
 	@kubectl apply -f ${PWD}/keys/keypair-secrets.yaml
 
 docker-images:
+	./scripts/sed-env-flutter.sh
 	@docker build -t localhost:5000/flutter-web flutter/
 	@docker build -t localhost:5000/maintemplate -f dockers/Dockerfile-dev .
 
