@@ -133,7 +133,7 @@ minikube-config:
 
 minikube-clean:
 	minikube delete
-	minikube start --insecure-registry="127.0.0.1/24"
+	minikube start --memory=4096 --cpus=2 --insecure-registry="127.0.0.1/24"
 
 minikube-run-registry:
 	./scripts/insecure-registries.sh
@@ -172,6 +172,9 @@ apply-secrets:
 docker-images:
 	@docker build -t localhost:5000/flutter-web flutter/
 	@docker build -t localhost:5000/maintemplate -f dockers/Dockerfile-dev .
+
+docker-authz:
+	@docker build -t localhost:5000/ext-authz -f ../../mod-account/server/authz/docker/Dockerfile ../../
 
 docker-push:
 	@docker push localhost:5000/maintemplate:latest

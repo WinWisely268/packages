@@ -1,5 +1,6 @@
 flutterImage: "flutter_image"
 maintempateServerImage: "maintemplate_server_image"
+extAuthzImage: "ext-authz_image"
 jwkIssuerUrl: "http://0.0.0.0"
 jwkIssuerPort: "9075"
 domainSetup: true
